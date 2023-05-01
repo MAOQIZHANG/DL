@@ -191,7 +191,7 @@ if __name__ == "__main__":
   valid_root_dirs=['Dataset_Student/val']
 
 
-  batch_size = 64  #change for time
+  batch_size = 16  #change for time
   epochs = 100
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -199,8 +199,8 @@ if __name__ == "__main__":
 
   # Create dataset and dataloader
   #number could be added here 
-  train_dataset = VideoDataset(train_root_dirs, 5000)
-  val_dataset = VideoDataset(valid_root_dirs, 500)
+  train_dataset = VideoDataset(train_root_dirs, 200)
+  val_dataset = VideoDataset(valid_root_dirs, 50)
   train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
   val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
 
@@ -278,7 +278,7 @@ if __name__ == "__main__":
 
       if val_loss < best_val_loss:
           best_val_loss = val_loss
-          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_full_2.pth")
+          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_200_50.pth")
           epochs_without_improvement = 0
       else:
           epochs_without_improvement += 1
