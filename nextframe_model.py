@@ -197,8 +197,9 @@ if __name__ == "__main__":
   scaler = GradScaler()
 
   # Create dataset and dataloader
-  train_dataset = VideoDataset(train_root_dirs)
-  val_dataset = VideoDataset(valid_root_dirs)
+  #number could be added here 
+  train_dataset = VideoDataset(train_root_dirs, 125)
+  val_dataset = VideoDataset(valid_root_dirs, 25)
   train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
   val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
 
