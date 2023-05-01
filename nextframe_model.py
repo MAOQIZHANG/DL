@@ -198,8 +198,8 @@ if __name__ == "__main__":
 
   # Create dataset and dataloader
   #number could be added here 
-  train_dataset = VideoDataset(train_root_dirs)
-  val_dataset = VideoDataset(valid_root_dirs)
+  train_dataset = VideoDataset(train_root_dirs, 1000)
+  val_dataset = VideoDataset(valid_root_dirs, 200)
   train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
   val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
 
