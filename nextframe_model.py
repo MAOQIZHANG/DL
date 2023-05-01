@@ -191,16 +191,16 @@ if __name__ == "__main__":
   valid_root_dirs=['Dataset_Student/val']
 
 
-  batch_size = 16  #change for time
-  epochs = 100
+  batch_size = 32  #change for time
+  epochs = 50 #100
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   scaler = GradScaler()
 
   # Create dataset and dataloader
   #number could be added here 
-  train_dataset = VideoDataset(train_root_dirs, 200)
-  val_dataset = VideoDataset(valid_root_dirs, 50)
+  train_dataset = VideoDataset(train_root_dirs)
+  val_dataset = VideoDataset(valid_root_dirs)
   train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
   val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
 

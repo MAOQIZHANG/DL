@@ -30,6 +30,7 @@ from torch.optim import AdamW
 from torch.cuda.amp import autocast, GradScaler
 from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import OneCycleLR
+import time
 
 class VideoDataset(Dataset):
     def __init__(self, root_dirs,num=None):
@@ -201,8 +202,8 @@ if __name__ == "__main__":
   valid_root_dirs=['Dataset_Student/val']
 
 
-  batch_size = 16
-  epochs = 100
+  batch_size = 32
+  epochs = 50 #100
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   scaler = GradScaler()
@@ -289,13 +290,20 @@ if __name__ == "__main__":
 
   best_val_loss = float('inf')
   print('Training started!')
+  
+  start_time = time.time()
+
   for epoch in range(1, epochs + 1):
       train_loss = train(model, train_dataloader, criterion, optimizer, device, scheduler)
       val_loss = validate(model, val_dataloader, criterion, device)
 
       scheduler.step(val_loss)
 
+      end_time = time.time()
+      elapsed_time = end_time - start_time
+
       print(f"Epoch {epoch}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
+      print(f"Time per epoch: {elapsed_time:.2f} seconds")
 
       if val_loss < best_val_loss:
           best_val_loss = val_loss
