@@ -263,8 +263,9 @@ if __name__ == "__main__":
   best_val_loss = float('inf')
   print('Training started!')
 
-  start_time = time.time()
   for epoch in range(1, epochs + 1):
+      start_time = time.time()
+      
       train_loss = train(model, train_dataloader, criterion, optimizer, device)
       val_loss = validate(model, val_dataloader, criterion, device)
 
