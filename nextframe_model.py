@@ -186,8 +186,8 @@ if __name__ == "__main__":
   #!gdown https://drive.google.com/uc?id=1fs3AmGYzHWOaMnG4rURC3M1QMStcz11-
   #!unzip Dataset_Student_V2.zip
   # Configuration
-  train_root_dirs= ['/content/Dataset_Student/train/','/content/Dataset_Student/unlabeled/']
-  valid_root_dirs=['/content/Dataset_Student/val']
+  train_root_dirs= ['Dataset_Student/train/','Dataset_Student/unlabeled/']
+  valid_root_dirs=['Dataset_Student/val']
 
 
   batch_size = 32
