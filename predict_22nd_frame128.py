@@ -139,11 +139,11 @@ if __name__ == "__main__":
   input_channels = 3  # For RGB images
   hidden_channels = 32
   kernel_size = 3
-  num_layers = 3
+  num_layers = 2
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length).to(device)
   # Load the trained model
-  model_path = "best_conv_lstm_model.pth"
+  model_path = "model_output/best_conv_lstm_model_b128_l2_e50.pth"
   model = model.to(device)
   model.load_state_dict(torch.load(model_path, map_location=device))
   model.eval()
@@ -157,10 +157,10 @@ if __name__ == "__main__":
       return output
 
   # Process the hidden set
-  hidden_dir = "/content/hidden/"
+  hidden_dir = "/scratch/mz3550/hidden/"
 
   # Create a folder to save the predicted 22nd frames
-  output_folder = "/content/predicted_22nd_frames"
+  output_folder = "predicted_22nd_frames_128"
   os.makedirs(output_folder, exist_ok=True)
 
   for folder in os.listdir(hidden_dir):
