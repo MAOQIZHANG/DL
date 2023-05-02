@@ -17,7 +17,7 @@ if __name__ == "__main__":
   print('begin')
   
   # Load the trained model
-  model_path = "/scratch/mz3550/model_output/best_conv_lstm_model_500_100.pth"
+  model_path = "/home/mz3550/model_output/best_conv_lstm_model_500_100.pth"
   model.load_state_dict(torch.load(model_path))
   model.eval()
 
