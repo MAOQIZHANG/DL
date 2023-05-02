@@ -175,14 +175,16 @@ if __name__ == "__main__":
           image = transforms.ToTensor()(image)
           input_frames.append(image)
       
+      print("image load success")
       input_frames = torch.stack(input_frames)
-      
+      print("image stack success")
       # Generate the 22nd frame using the model
       with torch.no_grad():
           predicted_22nd_frame = generate_22nd_frame(model, input_frames)
-      
+      print("predict success")
       # Save the predicted 22nd frame
       output_filename = os.path.join(output_folder, f"22nd_frame_{folder}.pt")
       torch.save(predicted_22nd_frame.cpu(), output_filename)
+      print("save predict success")
 
   print("finish")
