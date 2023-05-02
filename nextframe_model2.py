@@ -47,6 +47,8 @@ class VideoDataset(Dataset):
         if num:
           self.video_folders = self.video_folders[:num]
 
+        print(f"Total number of video directories being read/used: {len(self.video_folders)}")
+
 
     def __len__(self):
         return len(self.video_folders) * 11
@@ -198,20 +200,20 @@ if __name__ == "__main__":
   #!gdown https://drive.google.com/uc?id=1fs3AmGYzHWOaMnG4rURC3M1QMStcz11-
   #!unzip Dataset_Student_V2.zip
   # Configuration
-  train_root_dirs= ['Dataset_Student/train/','Dataset_Student/unlabeled/']
-  valid_root_dirs=['Dataset_Student/val']
+  train_root_dirs= ['/home/mz3550/squashfs-root/dataset/train/','/home/mz3550/squashfs-root/dataset/unlabeled/']
+  valid_root_dirs=['/home/mz3550/squashfs-root/dataset/val']
 
 
   batch_size = 32
-  epochs = 50 #100
+  epochs = 100
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   scaler = GradScaler()
 
   # Create dataset and dataloader
   #number could be added here 
-  train_dataset = VideoDataset(train_root_dirs,500)
-  val_dataset = VideoDataset(valid_root_dirs,100)
+  train_dataset = VideoDataset(train_root_dirs)
+  val_dataset = VideoDataset(valid_root_dirs)
   train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
   val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
 
