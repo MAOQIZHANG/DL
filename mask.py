@@ -15,8 +15,8 @@ model.eval()
 
 print('load model success')
 # Load and preprocess the image
-dir_path = 'predicted_22nd_frames_32'
-output_folder = "mask_32"
+dir_path = 'predicted_22nd_frames_full'
+output_folder = "mask_full"
 os.makedirs(output_folder, exist_ok=True)
 
 for filename in os.listdir(dir_path):
