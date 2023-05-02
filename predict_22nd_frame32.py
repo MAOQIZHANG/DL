@@ -135,7 +135,7 @@ class ConvLSTM(nn.Module):
 
 if __name__ == "__main__":
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+  print("device success")
   input_channels = 3  # For RGB images
   hidden_channels = 32
   kernel_size = 3
@@ -147,8 +147,8 @@ if __name__ == "__main__":
   model = model.to(device)
   model.load_state_dict(torch.load(model_path, map_location=device))
   model.eval()
-
   print("load model success")
+  
   # Function to generate the 22nd frame
   def generate_22nd_frame(model, input_frames):
       input_frames = input_frames.unsqueeze(0).to(device)
@@ -173,7 +173,6 @@ if __name__ == "__main__":
       for i in range(11):
           image_path = os.path.join(video_folder_path, f"image_{i}.png")
           image = Image.open(image_path).convert("RGB")
-          print("image open finish")
           image = transforms.ToTensor()(image)
           input_frames.append(image)
       

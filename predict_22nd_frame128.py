@@ -139,7 +139,7 @@ if __name__ == "__main__":
   input_channels = 3  # For RGB images
   hidden_channels = 32
   kernel_size = 3
-  num_layers = 3
+  num_layers = 2
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length).to(device)
   # Load the trained model
