@@ -15,8 +15,8 @@ model.eval()
 
 print('load model success')
 # Load and preprocess the image
-dir_path = 'predicted_22nd_frames_32'
-output_folder = "mask_32"
+dir_path = 'predicted_22nd_frames_64_2'
+output_folder = "mask_64"
 os.makedirs(output_folder, exist_ok=True)
 
 for filename in os.listdir(dir_path):
@@ -24,7 +24,6 @@ for filename in os.listdir(dir_path):
     if os.path.isfile(os.path.join(dir_path, filename)):
         file_, ext = os.path.splitext(filename)
         tensor = torch.load(os.path.join(dir_path, filename))
-        print('load success')
         image = image.to(device)  # Send the image to the device
         with torch.no_grad():
             output = model(image)
