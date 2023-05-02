@@ -147,7 +147,7 @@ if __name__ == "__main__":
   model = model.to(device)
   model.load_state_dict(torch.load(model_path, map_location=device))
   model.eval()
-
+  print("load model success")
   # Function to generate the 22nd frame
   def generate_22nd_frame(model, input_frames):
       input_frames = input_frames.unsqueeze(0).to(device)
@@ -158,10 +158,12 @@ if __name__ == "__main__":
 
   # Process the hidden set
   hidden_dir = "/scratch/mz3550/hidden/"
+  
 
   # Create a folder to save the predicted 22nd frames
   output_folder = "predicted_22nd_frames_full"
   os.makedirs(output_folder, exist_ok=True)
+  print("mkdir success")
 
   for folder in os.listdir(hidden_dir):
       video_folder_path = os.path.join(hidden_dir, folder)
@@ -182,3 +184,5 @@ if __name__ == "__main__":
       # Save the predicted 22nd frame
       output_filename = os.path.join(output_folder, f"22nd_frame_{folder}.pt")
       torch.save(predicted_22nd_frame.cpu(), output_filename)
+
+  print("finish")
