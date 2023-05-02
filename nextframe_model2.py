@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
   # Initialize the ConvLSTM model
   input_channels = 3  # For RGB images
-  hidden_channels = 64
+  hidden_channels = 32
   kernel_size = 3
   num_layers = 3
   seq_length = 11
