@@ -13,8 +13,7 @@ import torchvision.transforms as transforms
 import torch
 
 if __name__ == "__main__":
-  
-  print('begin')
+
   
   # Load the trained model
   model_path = "/home/mz3550/model_output/best_conv_lstm_model_500_100.pth"
@@ -35,11 +34,14 @@ if __name__ == "__main__":
   # Create a folder to save the predicted 22nd frames
   output_folder = "/home/mz3550/predicted_22nd_frames"
   os.makedirs(output_folder, exist_ok=True)
-
+    
+  print('begin')
+  i = 0
   for folder in os.listdir(hidden_dir):
       video_folder_path = os.path.join(hidden_dir, folder)
-      
+      i = i + 1
       input_frames = []
+      print(i)
       for i in range(11):
           image_path = os.path.join(video_folder_path, f"image_{i}.png")
           image = Image.open(image_path).convert("RGB")
