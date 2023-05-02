@@ -24,12 +24,7 @@ for filename in os.listdir(dir_path):
     if os.path.isfile(os.path.join(dir_path, filename)):
         file_, ext = os.path.splitext(filename)
         tensor = torch.load(os.path.join(dir_path, filename))
-        numpy_array = tensor.numpy()
-        image = Image.fromarray(numpy_array)
-        tensor = torch.from_numpy(numpy_array)
-
         print('load success')
-        image = image.unsqueeze(0)  # Add a batch dimension
         image = image.to(device)  # Send the image to the device
         with torch.no_grad():
             output = model(image)
