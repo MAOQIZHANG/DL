@@ -204,7 +204,7 @@ if __name__ == "__main__":
   valid_root_dirs=['/home/mz3550/squashfs-root/dataset/val']
 
 
-  batch_size = 128
+  batch_size = 32
   epochs = 50
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -221,7 +221,7 @@ if __name__ == "__main__":
   input_channels = 3  # For RGB images
   hidden_channels = 32
   kernel_size = 3
-  num_layers = 2
+  num_layers = 3
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length)
 
