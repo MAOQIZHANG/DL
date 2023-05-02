@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
 
   batch_size = 32
-  epochs = 100
+  epochs = 50
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   scaler = GradScaler()
@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
   # Initialize the ConvLSTM model
   input_channels = 3  # For RGB images
-  hidden_channels = 32
+  hidden_channels = 64
   kernel_size = 3
   num_layers = 3
   seq_length = 11
@@ -310,7 +310,7 @@ if __name__ == "__main__":
 
       if val_loss < best_val_loss:
           best_val_loss = val_loss
-          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_full.pth")
+          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_b64_e50.pth")
           epochs_without_improvement = 0
       else:
           epochs_without_improvement += 1
