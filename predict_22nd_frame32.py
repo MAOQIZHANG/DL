@@ -170,6 +170,7 @@ if __name__ == "__main__":
       for i in range(11):
           image_path = os.path.join(video_folder_path, f"image_{i}.png")
           image = Image.open(image_path).convert("RGB")
+          print("finish 1")
           image = transforms.ToTensor()(image)
           input_frames.append(image)
       
@@ -182,3 +183,4 @@ if __name__ == "__main__":
       # Save the predicted 22nd frame
       output_filename = os.path.join(output_folder, f"22nd_frame_{folder}.pt")
       torch.save(predicted_22nd_frame.cpu(), output_filename)
+  print("finish")

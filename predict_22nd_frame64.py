@@ -182,3 +182,4 @@ if __name__ == "__main__":
       # Save the predicted 22nd frame
       output_filename = os.path.join(output_folder, f"22nd_frame_{folder}.pt")
       torch.save(predicted_22nd_frame.cpu(), output_filename)
+  print("finish")
