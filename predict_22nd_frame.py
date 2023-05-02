@@ -16,9 +16,11 @@ if __name__ == "__main__":
 
   
   # Load the trained model
-  model_path = "/home/mz3550/model_output/best_conv_lstm_model_500_100.pth"
+  model_path = "model_output/best_conv_lstm_model_500_100.pth"
   model.load_state_dict(torch.load(model_path))
   model.eval()
+
+  print('begin1')
 
   # Function to generate the 22nd frame
   def generate_22nd_frame(model, input_frames):
@@ -27,15 +29,18 @@ if __name__ == "__main__":
           output = model(input_frames)
           input_frames = torch.cat((input_frames[:, 1:], output.unsqueeze(1)), dim=1)
       return output
+  
+  print('begin2')
 
   # Process the hidden set
-  hidden_dir = "/scratch/mz3550/hidden/"
+  hidden_dir = "hidden/"
 
   # Create a folder to save the predicted 22nd frames
-  output_folder = "/home/mz3550/predicted_22nd_frames"
+  output_folder = "predicted_22nd_frames"
   os.makedirs(output_folder, exist_ok=True)
     
-  print('begin')
+  print('begin3')
+
   i = 0
   for folder in os.listdir(hidden_dir):
       video_folder_path = os.path.join(hidden_dir, folder)
