@@ -310,7 +310,7 @@ if __name__ == "__main__":
 
       if val_loss < best_val_loss:
           best_val_loss = val_loss
-          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_b16_e50.pth")
+          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_b128_e50.pth")
           epochs_without_improvement = 0
       else:
           epochs_without_improvement += 1
