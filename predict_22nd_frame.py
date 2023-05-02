@@ -158,7 +158,7 @@ if __name__ == "__main__":
       return output
 
   # Process the hidden set
-  hidden_dir = "/scratch/mz3550/hidden/"
+  hidden_dir = "hidden/"
   
   # Create a folder to save the predicted 22nd frames
   output_folder = "predicted_22nd_frames_full"
@@ -169,9 +169,11 @@ if __name__ == "__main__":
       video_folder_path = os.path.join(hidden_dir, folder)
       
       input_frames = []
+      print("finish 1")
       for i in range(11):
           image_path = os.path.join(video_folder_path, f"image_{i}.png")
           image = Image.open(image_path).convert("RGB")
+          print("image open finish")
           image = transforms.ToTensor()(image)
           input_frames.append(image)
       

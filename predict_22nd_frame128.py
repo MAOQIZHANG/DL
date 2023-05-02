@@ -157,7 +157,7 @@ if __name__ == "__main__":
       return output
 
   # Process the hidden set
-  hidden_dir = "/scratch/mz3550/hidden/"
+  hidden_dir = "hidden/"
 
   # Create a folder to save the predicted 22nd frames
   output_folder = "predicted_22nd_frames_128"
