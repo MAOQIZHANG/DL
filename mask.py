@@ -7,11 +7,12 @@ from math import e
  
 from unet_model import UNet
 
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = UNet()
-model.load_state_dict(torch.load('unet_best_model.pth'))
 model = model.to(device)
-model.eval()  # Set the model to evaluation mode
+model.load_state_dict(torch.load('./unet_best_model.pth', map_location=device))
+model.eval()
+
 print('load model success')
 # Load and preprocess the image
 dir_path = 'predicted_22nd_frames_32'
