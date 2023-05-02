@@ -143,7 +143,7 @@ if __name__ == "__main__":
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length).to(device)
   # Load the trained model
-  model_path = "model_output/best_conv_lstm_model_test.pth"
+  model_path = "best_conv_lstm_model_b32_l3_e50.pth"
   model = model.to(device)
   model.load_state_dict(torch.load(model_path, map_location=device))
   model.eval()
@@ -161,7 +161,7 @@ if __name__ == "__main__":
   hidden_dir = "hidden/"
   
   # Create a folder to save the predicted 22nd frames
-  output_folder = "predicted_22nd_frames_test"
+  output_folder = "predicted_22nd_frames_32"
   os.makedirs(output_folder, exist_ok=True)
   print("mkdir success")
 
