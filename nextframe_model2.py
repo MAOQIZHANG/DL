@@ -204,7 +204,7 @@ if __name__ == "__main__":
   valid_root_dirs=['/home/mz3550/squashfs-root/dataset/val']
 
 
-  batch_size = 64
+  batch_size = 128
   epochs = 50
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -221,7 +221,7 @@ if __name__ == "__main__":
   input_channels = 3  # For RGB images
   hidden_channels = 32
   kernel_size = 3
-  num_layers = 3
+  num_layers = 2
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length)
 
@@ -310,7 +310,7 @@ if __name__ == "__main__":
 
       if val_loss < best_val_loss:
           best_val_loss = val_loss
-          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_b64_e50_2.pth")
+          torch.save(model.state_dict(), "model_output/best_conv_lstm_model_b128_l2_e50.pth")
           epochs_without_improvement = 0
       else:
           epochs_without_improvement += 1
