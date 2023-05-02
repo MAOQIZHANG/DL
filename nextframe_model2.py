@@ -204,7 +204,7 @@ if __name__ == "__main__":
   valid_root_dirs=['/home/mz3550/squashfs-root/dataset/val']
 
 
-  batch_size = 16
+  batch_size = 128
   epochs = 50
   learning_rate = 0.001
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -212,7 +212,7 @@ if __name__ == "__main__":
 
   # Create dataset and dataloader
   #number could be added here 
-  train_dataset = VideoDataset(train_root_dirs, 5000)
+  train_dataset = VideoDataset(train_root_dirs)
   val_dataset = VideoDataset(valid_root_dirs)
   train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
   val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
