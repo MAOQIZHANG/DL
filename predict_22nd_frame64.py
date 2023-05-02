@@ -145,7 +145,11 @@ if __name__ == "__main__":
   # Load the trained model
   model_path = "model_output/best_conv_lstm_model_b64_l3_e50.pth"
   model = model.to(device)
-  model.load_state_dict(torch.load(model_path, map_location=device))
+  state_dict = torch.load(model_path, map_location=device)
+  new_state_dict = {k.replace("module.", ""): v for k, v in state_dict.items()} 
+  
+  model = model.to(device)
+  model.load_state_dict(new_state_dict)
   model.eval()
 
   print("load model success")

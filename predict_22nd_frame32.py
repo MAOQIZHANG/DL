@@ -143,9 +143,11 @@ if __name__ == "__main__":
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length).to(device)
   # Load the trained model
-  model_path = "model_output/best_conv_lstm_model_b32_l3_e50.pth"
+  model_path = "model_output/best_conv_lstm_model_b64_l2_e50.pth"
+  state_dict = torch.load(model_path, map_location=device)
+  new_state_dict = {k.replace("module.", ""): v for k, v in state_dict.items()} 
   model = model.to(device)
-  model.load_state_dict(torch.load(model_path, map_location=device))
+  model.load_state_dict(new_state_dict)
   model.eval()
   print("load model success")
   
@@ -161,7 +163,7 @@ if __name__ == "__main__":
   hidden_dir = "hidden/"
   
   # Create a folder to save the predicted 22nd frames
-  output_folder = "predicted_22nd_frames_32"
+  output_folder = "predicted_22nd_frames_64_2"
   os.makedirs(output_folder, exist_ok=True)
   print("mkdir success")
 
@@ -176,13 +178,10 @@ if __name__ == "__main__":
           image = transforms.ToTensor()(image)
           input_frames.append(image)
       
-      print("image load success")
       input_frames = torch.stack(input_frames)
-      print("image stack success")
       # Generate the 22nd frame using the model
       with torch.no_grad():
           predicted_22nd_frame = generate_22nd_frame(model, input_frames)
-      print("predict success")
       # Save the predicted 22nd frame
       output_filename = os.path.join(output_folder, f"22nd_frame_{folder}.pt")
       torch.save(predicted_22nd_frame.cpu(), output_filename)

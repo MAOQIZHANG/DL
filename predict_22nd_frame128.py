@@ -144,8 +144,10 @@ if __name__ == "__main__":
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length).to(device)
   # Load the trained model
   model_path = "model_output/best_conv_lstm_model_b128_l2_e50.pth"
+  state_dict = torch.load(model_path, map_location=device)
+  new_state_dict = {k.replace("module.", ""): v for k, v in state_dict.items()}
   model = model.to(device)
-  model.load_state_dict(torch.load(model_path, map_location=device))
+  model.load_state_dict(new_state_dict)
   model.eval()
 
   print("load model success")
