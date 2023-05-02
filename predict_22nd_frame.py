@@ -15,7 +15,7 @@ import torch
 if __name__ == "__main__":
 
   # Load the trained model
-  model_path = "model_output/best_conv_lstm_model.pth"
+  model_path = "model_output/best_conv_lstm_model_500_100.pth"
   model.load_state_dict(torch.load(model_path))
   model.eval()
 
