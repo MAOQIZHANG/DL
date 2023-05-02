@@ -16,7 +16,7 @@ model.eval()
 print('load model success')
 # Load and preprocess the image
 dir_path = 'predicted_22nd_frames_64_2'
-output_folder = "mask_64"
+output_folder = "mask_64_2"
 os.makedirs(output_folder, exist_ok=True)
 
 for filename in os.listdir(dir_path):
@@ -24,7 +24,7 @@ for filename in os.listdir(dir_path):
     if os.path.isfile(os.path.join(dir_path, filename)):
         file_, ext = os.path.splitext(filename)
         tensor = torch.load(os.path.join(dir_path, filename))
-        image = image.to(device)  # Send the image to the device
+        image = tensor.to(device)  # Send the image to the device
         with torch.no_grad():
             output = model(image)
             print('generate success')
@@ -33,6 +33,31 @@ for filename in os.listdir(dir_path):
         mask = np.squeeze(mask)
         output_path = os.path.join(output_folder, file_)+".npy"
         np.save(output_path, mask)
+
+# Specify the directory
+dir_path = 'mask_64'
+
+# Initialize an empty list to hold the numpy arrays
+arrays = []
+
+# Loop over the file numbers
+for i in range(15000, 17000):  # Modify this range as needed
+    # Construct the file name
+    file_name = f'22nd_frame_video_{i}.npy'
+    file_path = os.path.join(dir_path, file_name)
+
+    # Check if the file exists
+    if os.path.isfile(file_path):
+        # Load the numpy array from the file
+        array = np.load(file_path)
+        # Append the array to the list
+        arrays.append(array)
+
+# Stack the arrays along the first dimension (axis=0)
+stacked_array = np.stack(arrays, axis=0)
+
+# Save the stacked array to a file
+np.save('final/final_64_3.npy', stacked_array)
 
 print('finish')
 '''
