@@ -139,7 +139,7 @@ if __name__ == "__main__":
   input_channels = 3  # For RGB images
   hidden_channels = 32
   kernel_size = 3
-  num_layers = 2
+  num_layers = 3
   seq_length = 11
   model = ConvLSTM(input_channels, hidden_channels, kernel_size, num_layers, seq_length).to(device)
   # Load the trained model
@@ -148,6 +148,7 @@ if __name__ == "__main__":
   model.load_state_dict(torch.load(model_path, map_location=device))
   model.eval()
 
+  print("load model success")
   # Function to generate the 22nd frame
   def generate_22nd_frame(model, input_frames):
       input_frames = input_frames.unsqueeze(0).to(device)
@@ -158,28 +159,34 @@ if __name__ == "__main__":
 
   # Process the hidden set
   hidden_dir = "hidden/"
-
+  
   # Create a folder to save the predicted 22nd frames
   output_folder = "predicted_22nd_frames_128"
   os.makedirs(output_folder, exist_ok=True)
+  print("mkdir success")
 
   for folder in os.listdir(hidden_dir):
       video_folder_path = os.path.join(hidden_dir, folder)
       
       input_frames = []
+      print("finish 1")
       for i in range(11):
           image_path = os.path.join(video_folder_path, f"image_{i}.png")
           image = Image.open(image_path).convert("RGB")
+          print("image open finish")
           image = transforms.ToTensor()(image)
           input_frames.append(image)
       
+      print("image load success")
       input_frames = torch.stack(input_frames)
-      
+      print("image stack success")
       # Generate the 22nd frame using the model
       with torch.no_grad():
           predicted_22nd_frame = generate_22nd_frame(model, input_frames)
-      
+      print("predict success")
       # Save the predicted 22nd frame
       output_filename = os.path.join(output_folder, f"22nd_frame_{folder}.pt")
       torch.save(predicted_22nd_frame.cpu(), output_filename)
+      print("save predict success")
+
   print("finish")
